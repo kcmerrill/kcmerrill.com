@@ -120,7 +120,7 @@ angular.module('chronicles.services', [])
                     {
                         _id: '5',
                         title: { 
-                            text: 'My retirement, in case my real retirement goes south #macklemore',
+                            text: 'My retirement, in case my real retirement goes south.',
                             font: {
                                 color: 'white',
                                 shadow: 'black',
