@@ -248,4 +248,6 @@ body{
 
 .chronicles .channels .prev-next i{
     cursor:pointer;
+    width:15px;
+    display:inline-block;
 }
