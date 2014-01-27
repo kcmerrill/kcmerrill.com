@@ -13,32 +13,40 @@ angular.module('chronicles.controllers', [])
         return Chronicles.index != 0;
     }
     $scope.showNext = function(){
-        return Chronicles.index != (Chronicles.all.length - 1);
+        return Chronicles.index != (Chronicles.timeline.length - 1);
     }
 })           
 .controller('ChronicleCtrl', function($scope, angulargmContainer, $location, $routeParams, Chronicles, Channels) {
+    /* Setting up my scope variables */
     $scope.chronicles = Chronicles;
     $scope.channels = Channels;
+    $scope.path = $location.path().replace('/','');
+    $scope.view = 'partials/loading.html';
     
     /* Default to the bio */
-    var current = 'bio';
-
-    /* Should we be using something other than bio? */
-    if($scope.chronicles.current.id == undefined && $location.path() != ''){
-            current = $location.path().replace('/','');
-    }
+    var chronicle_id = $scope.path != 'loading' && !_.isEmpty($scope.path) ? $scope.path.replace('/','') : 'bio';
     
     /* Fetch the current chronicle */
     $scope.fetch = function(chronicle_id){
-        $scope.chronicles.fetch(chronicle_id);
-        $scope.view = 'partials/' + $scope.chronicles.current.layout + '.html';
-    }
+        console.log('fetch('+chronicle_id+')');
+        $scope.chronicles.fetch(chronicle_id, true, false, function(){
+            $scope.view = 'partials/' + $scope.chronicles.current.layout + '.html';
+        });
+    };
+
+    /* Change the channel */
+    $scope.nextChannel = function(){
+        $scope.chronicles.fetchTimeline($scope.channels.next());
+    };
     
-    /* grabs what we determiend to be the current chronicle. */
-    $scope.fetch(current);
+    $scope.previousChannel = function(){
+        $scope.chronicles.fetchTimeline($scope.channels.previous());
+    };
     
-    /* fetch all the channels */
-    $scope.channels.fetch();
+    /* Giddy up! */
+    $scope.chronicles.init(function(){
+        $scope.fetch(chronicle_id);
+    });
     
     /* If we have a map, that needs zooming, panning or whatever, lets do it here */
     if($scope.chronicles.current.map != undefined){

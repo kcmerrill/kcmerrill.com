@@ -13,30 +13,34 @@
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
    -->
-  <div class="content" ng-view></div>
-  
+  <div class="content" ng-view></div>  
   <div class="goto previous" ng-controller="GoToCtrl" ng-show="showPrevious()">
       <div class="medium-font oswald fluff" ng-click="previous()">
-          <i class="fa fa-backward"></i> Previous
+          Previous
       </div>
   </div>
   <div class="goto next" ng-controller="GoToCtrl" ng-show="showNext()">
       <div class="medium-font oswald fluff pull-right" ng-click="next()">
-          <i class="fa fa-forward"></i> Next
+          Next
       </div>
   </div>
   <div class="timeline" ng-controller="ChronicleCtrl">     
     <div class="chronicles">
+        <div class="chronicle pull-left" style="background-image:url('{{chronicles.bio.thumbnail.image}}')" ng-click="chronicles.fetch('bio')">
+            <div class="type" style="color:{{chronicles.bio.thumbnail.icon.color}}">
+                <i class="fa fa-{{chronicles.bio.thumbnail.icon.class}}"></i>
+            </div>
+        </div>        
         <div class="channels pull-left oswald">          
             <div class="oswald small-font opensans">
                 Current Channel:
             </div>
             {{channels.current}}
             <div class="prev-next">
-                <i class="fa fa-caret-down" ng-click="channels.next()"></i>&nbsp;<i class="fa fa-caret-up" ng-click="channels.previous()"></i>
+                <i class="fa fa-caret-down" ng-click="nextChannel()"></i>&nbsp;<i class="fa fa-caret-up" ng-click="previousChannel()"></i>
             </div>
         </div>        
-        <div class="chronicle" style="background-image:url('{{chronicle.thumbnail.image}}')" ng-click="chronicles.fetch(chronicle._id)" ng-repeat="chronicle in chronicles.all">
+        <div class="chronicle" style="background-image:url('{{chronicle.thumbnail.image}}')" ng-click="chronicles.fetch(chronicle.id)" ng-repeat="chronicle in chronicles.timeline">
             <div class="type" style="color:{{chronicle.thumbnail.icon.color}}">
                 <i class="fa fa-{{chronicle.thumbnail.icon.class}}"></i>
             </div>
@@ -54,7 +58,7 @@
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
   <script src="//maps.googleapis.com/maps/api/js?sensor=false"></script>
-  <script src="//angulargm.herokuapp.com/angular-gm-0.3.1.min.js"></script> 
+  <script src="//angulargm.herokuapp.com/angular-gm-0.3.1.min.js"></script>
   <script src="http://cdnjs.cloudflare.com/ajax/libs/showdown/0.3.1/showdown.min.js"></script>    
   <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>    
 </body>
