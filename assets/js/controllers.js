@@ -21,6 +21,7 @@ angular.module('chronicles.controllers', [])
     $scope.chronicles = Chronicles;
     $scope.channels = Channels;
     $scope.path = $location.path().replace('/','');
+    $scope.view = 'partials/loading.html';
     
     /* Default to the bio */
     var chronicle_id = $scope.path != 'loading' && !_.isEmpty($scope.path) ? $scope.path.replace('/','') : 'bio';

@@ -10,5 +10,5 @@ angular.module('chronicles', [
 ]).
 config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/:id', {template: '<div ng-include="view" class="content">Loading...</div>', controller: 'ChronicleCtrl'});
-  $routeProvider.otherwise({redirectTo: '/loading'});
+  $routeProvider.otherwise({redirectTo: '/bio'});
 }]);
