@@ -35,7 +35,6 @@ angular.module('chronicles.services', [])
             current:{},
             loaded: false,
             loading: [],
-            view: 'partials/loading.html',
             limit: 100,
             previous: function(){
                 var idx = this.selected_idx - 1;
@@ -50,8 +49,13 @@ angular.module('chronicles.services', [])
                 }       
             },
             init: function(callback){
-                console.log('initing');
                 var self = this;
+
+                if(self.loaded){
+                    return false;
+                }
+                console.log('initinggggg');
+                
                 /* Fetch our timeline */
                 self.fetchTimeline('everything', function(){
                     /* Fetch our bio */
@@ -62,11 +66,13 @@ angular.module('chronicles.services', [])
                 self.loaded = true;               
             },
             fetchTimeline: function(channel, callback){
+                console.log('fetchTimeLine()');
                 var self = this;        
                 var params = { limit : self.limit };
                 
                 /* Have we already loaded the appropriate timeline? */
                 if(channel.toLowerCase() == Channels.current.toLowerCase()){
+                    console.log('I think we have the appropriate timeline loaded?');
                     return true;
                 }
                 
@@ -91,13 +97,14 @@ angular.module('chronicles.services', [])
                 });
             },
             /** Will try to fetch specific chronicles from db if not already loaded **/
-            fetch: function(chronicle, render, assign, callback){
+            fetch: function(chronicle, render, assign, callback){                
                 var self = this;                            
-                render = render == undefined ? true : false;
-                assign = assign == undefined ? false : true;
+                render = render == undefined ? true : render;
+                assign = assign == undefined ? false : assign;
                 
                 /* No need to load an empty chronicle */
                 if(_.isEmpty(chronicle)){
+                    console.log('chronicle is empty ...');
                     return true;
                 }
                 
@@ -112,7 +119,6 @@ angular.module('chronicles.services', [])
                 /* Still no dice? Fine fine, fetch it from the db */
                 if(fetched == undefined && _.indexOf(self.loading, chronicle) < 0){
                     self.loading.push(chronicle);
-                    self.view = 'partials/loading.html';
                     $http({method: 'GET', url: '/chronicles/' + chronicle})
                         .error(function(data, status, headers, config){
                             $location.url('error');
@@ -124,7 +130,9 @@ angular.module('chronicles.services', [])
                     });                     
                 } else {
                     return self.fetched(chronicle, fetched, render, assign, callback);    
-                }                                
+                }                          
+                
+                return self.fetched(chronicle, fetched, true, false, callback);
             },
             /* After a chronicle has been 'fetched', do the post processing on it */
             fetched: function(chronicle_id, chronicle, render, assign, callback){
@@ -132,12 +140,18 @@ angular.module('chronicles.services', [])
                 if(assign && chronicle){
                     self.assign(chronicle_id, chronicle);
                 }
+                
                 if(render && chronicle){
+                    console.log('should be rendering');
                     self.current = chronicle;
                     self.render(chronicle_id);
                     self.selected_idx = self.current.index;
                 }
+                
+                console.log('callback: ' + typeof callback);
+                
                 if(typeof callback == 'function'){
+                    console.log('callback!');
                     callback();                    
                 }
             },
@@ -145,7 +159,6 @@ angular.module('chronicles.services', [])
                 var self = this;
                 /* Only render if current chronicle is set */
                 if(!_.isEmpty(self.current)){
-                    self.view = 'partials/' + self.current.layout + '.html';
                     $location.url(chronicle_id);                 
                 } 
             },
