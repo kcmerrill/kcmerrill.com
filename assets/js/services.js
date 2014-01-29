@@ -142,7 +142,7 @@ angular.module('chronicles.services', [])
                 }
                 
                 if(render && chronicle){
-                    console.log('should be rendering');
+                    console.log('should be rendering', chronicle);
                     self.current = chronicle;
                     self.render(chronicle_id);
                     self.selected_idx = self.current.index;

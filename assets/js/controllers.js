@@ -21,8 +21,9 @@ angular.module('chronicles.controllers', [])
     $scope.chronicles = Chronicles;
     $scope.channels = Channels;
     $scope.path = $location.path().replace('/','');
-    $scope.view = 'partials/loading.html';
+    $scope.view = _.isEmpty($scope.chronicles.current) ? 'partials/loading.html' : 'partials/' + $scope.chronicles.current + '.html';
     
+    console.log('current:', $scope.chronicles.current);
     /* Default to the bio */
     var chronicle_id = $scope.path != 'loading' && !_.isEmpty($scope.path) ? $scope.path.replace('/','') : 'bio';
     
@@ -30,7 +31,7 @@ angular.module('chronicles.controllers', [])
     $scope.fetch = function(chronicle_id){
         console.log('fetch('+chronicle_id+')');
         $scope.chronicles.fetch(chronicle_id, true, false, function(){
-            $scope.view = 'partials/' + $scope.chronicles.current.layout + '.html';
+            console.log('current:', $scope.chronicles.current);
         });
     };
 
@@ -45,6 +46,7 @@ angular.module('chronicles.controllers', [])
     
     /* Giddy up! */
     $scope.chronicles.init(function(){
+        $scope.view = 'partials/bio/basic.html';
         console.log('fetch() from controller');
         $scope.fetch(chronicle_id);
     });
