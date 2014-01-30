@@ -164,9 +164,10 @@ body{
 }
 .timeline .chronicles{
     display:none;
-    height:95px;
+    height:94px;
     width:100%;
     background-color:rgba(0,0,0,.8);
+    overflow:hidden;
 }
 
 .timeline .chronicles .chronicle{    
