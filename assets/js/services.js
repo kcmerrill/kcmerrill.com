@@ -83,7 +83,8 @@ angular.module('chronicles.services', [])
                 }
                 $http({method: 'GET', url: '/chronicles', params: params}).
                   success(function(data, status, headers, config) {
-                    self.timeline = _.filter(data, function(c){ return c.id != 'bio'});                      
+                    self.timeline = _.filter(data, function(c){ return c.id != 'bio'}); 
+                      
                     /* We need to assign the index to each object, so we can do fwd, prev ect ... */
                     _.each(self.timeline, function(obj, idx){
                         self.timeline[idx].index = idx;
