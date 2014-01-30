@@ -23,16 +23,12 @@ angular.module('chronicles.controllers', [])
     $scope.path = $location.path().replace('/','');
     $scope.view = _.isEmpty($scope.chronicles.current) ? 'partials/loading.html' : 'partials/' + $scope.chronicles.current + '.html';
     
-    console.log('current:', $scope.chronicles.current);
     /* Default to the bio */
     var chronicle_id = $scope.path != 'loading' && !_.isEmpty($scope.path) ? $scope.path.replace('/','') : 'bio';
     
     /* Fetch the current chronicle */
     $scope.fetch = function(chronicle_id){
-        console.log('fetch('+chronicle_id+')');
-        $scope.chronicles.fetch(chronicle_id, true, false, function(){
-            console.log('current:', $scope.chronicles.current);
-        });
+        $scope.chronicles.fetch(chronicle_id, true, false, function(){});
     };
 
     /* Change the channel */
@@ -47,7 +43,6 @@ angular.module('chronicles.controllers', [])
     /* Giddy up! */
     $scope.chronicles.init(function(){
         $scope.view = 'partials/bio/basic.html';
-        console.log('fetch() from controller');
         $scope.fetch(chronicle_id);
     });
     
@@ -111,8 +106,8 @@ angular.module('chronicles.controllers', [])
     $scope.whatever = function(){
       var gmapPromise = $scope.angulargmContainer.getMapPromise('myMap');
       gmapPromise.then(function(gmap) {
-        console.log(gmap.center);
-        console.log('lat:' + gmap.center.ob, 'Long:' + gmap.center.pb);
+        //console.log(gmap.center);
+        //console.log('lat:' + gmap.center.ob, 'Long:' + gmap.center.pb);
         return true;
         var pov = {
             heading: 34,
@@ -120,7 +115,7 @@ angular.module('chronicles.controllers', [])
         };
         var panorama = new google.maps.StreetViewPanorama(document.getElementById('myMap'),pov);
         gmap.setStreetView(panorama);    
-        console.log(gmap.streetView.heading, gmap.streetView.pitch);
+        //console.log(gmap.streetView.heading, gmap.streetView.pitch);
       });    
     }
 });

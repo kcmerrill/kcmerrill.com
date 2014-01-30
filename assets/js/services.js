@@ -34,6 +34,7 @@ angular.module('chronicles.services', [])
             timeline: [],
             current:{},
             loaded: false,
+            loaded_timeline: '',
             loading: [],
             limit: 100,
             previous: function(){
@@ -54,7 +55,6 @@ angular.module('chronicles.services', [])
                 if(self.loaded){
                     return false;
                 }
-                console.log('initinggggg');
                 
                 /* Fetch our timeline */
                 self.fetchTimeline('everything', function(){
@@ -66,13 +66,11 @@ angular.module('chronicles.services', [])
                 self.loaded = true;               
             },
             fetchTimeline: function(channel, callback){
-                console.log('fetchTimeLine()');
                 var self = this;        
                 var params = { limit : self.limit };
                 
                 /* Have we already loaded the appropriate timeline? */
-                if(channel.toLowerCase() == Channels.current.toLowerCase()){
-                    console.log('I think we have the appropriate timeline loaded?');
+                if(channel.toLowerCase() == self.loaded_timeline.toLowerCase()){
                     return true;
                 }
                 
@@ -90,6 +88,9 @@ angular.module('chronicles.services', [])
                     _.each(self.timeline, function(obj, idx){
                         self.timeline[idx].index = idx;
                     });
+                      
+                    /* set loaded timeline */
+                    self.loaded_timeline = channel;
                     /* Be sure to perform the appropriate callback */
                     if(typeof callback == 'function'){
                         callback();                    
@@ -104,7 +105,6 @@ angular.module('chronicles.services', [])
                 
                 /* No need to load an empty chronicle */
                 if(_.isEmpty(chronicle)){
-                    console.log('chronicle is empty ...');
                     return true;
                 }
                 
@@ -142,16 +142,12 @@ angular.module('chronicles.services', [])
                 }
                 
                 if(render && chronicle){
-                    console.log('should be rendering', chronicle);
                     self.current = chronicle;
                     self.render(chronicle_id);
                     self.selected_idx = self.current.index;
                 }
                 
-                console.log('callback: ' + typeof callback);
-                
                 if(typeof callback == 'function'){
-                    console.log('callback!');
                     callback();                    
                 }
             },
