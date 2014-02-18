@@ -2,6 +2,21 @@
 
 /* Controllers */
 angular.module('chronicles.controllers', [])
+.controller('AdminCtrl', function($scope, Chronicles){
+    $scope.mode = 'Admin Panel';
+    $scope.chronicles = Chronicles;
+    $scope.mode = 'Admin Panel';
+
+    $scope.create = function(){
+        $scope.mode = 'Create';
+        $scope.chronicles.create();
+    };
+
+    $scope.layout = function(layout){
+        $scope.chronicles.current.layout = layout;
+        $scope.mode = 'Admin Panel';
+    }
+})
 .controller('GoToCtrl', function($scope, Chronicles) {
     $scope.previous = function(){
         Chronicles.previous();
@@ -45,7 +60,7 @@ angular.module('chronicles.controllers', [])
         $scope.view = 'partials/bio/basic.html';
         $scope.fetch(chronicle_id);
     });
-    
+
     /* If we have a map, that needs zooming, panning or whatever, lets do it here */
     if($scope.chronicles.current.map != undefined){
         var lat = $scope.chronicles.current.map.center == undefined ? 0 : $scope.chronicles.current.map.center.lat;

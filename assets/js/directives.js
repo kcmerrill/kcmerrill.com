@@ -9,8 +9,10 @@ angular.module('chronicles.directives', [])
     return {
         restrict: 'AE',        
         link: function (scope, element, attrs) {
-            var htmlText = converter.makeHtml(attrs.markdown);
-            element.html(htmlText);
+            attrs.$observe('markdown', function(value){
+                var htmlText = converter.makeHtml(value);
+                element.html(htmlText);
+            });
         }
     };
 
@@ -24,3 +26,4 @@ angular.module('chronicles.directives', [])
     };
 
 });
+

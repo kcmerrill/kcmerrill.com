@@ -37,6 +37,7 @@ angular.module('chronicles.services', [])
             loaded_timeline: '',
             loading: [],
             limit: 100,
+            channels: Channels,
             previous: function(){
                 var idx = this.selected_idx - 1;
                 if(idx >= 0){
@@ -157,12 +158,43 @@ angular.module('chronicles.services', [])
                 /* Only render if current chronicle is set */
                 if(!_.isEmpty(self.current)){
                     $location.url(chronicle_id);                 
-                } 
+                }
             },
             assign: function(chronicle_id, chronicle){
                 var self = this;
                 self[chronicle_id] = chronicle;
                 self[chronicle_id].index = -1;                
+            },
+            create: function(){
+                var self = this;
+                /* Create a default chronicle. For starters, lets just setup basic colors and fonts */
+                self.current = {
+                    created : moment().format('MMM Do YYYY'),
+                    title: {
+                        text: "",
+                        font: {
+                            color: "white",
+                            shadow: "black",
+                            face: "oswald",
+                            size: 40
+                        },
+                        background: {
+                            r: 0,
+                            g: 0,
+                            b: 0,
+                            a: 0.6
+                        }
+                    },
+                    content: {
+                        text : "Sample text",
+                        background: {
+                            r: 0,
+                            g: 0,
+                            b: 0,
+                            a: 0.6
+                        }
+                    }
+                };
             }
         };
     });
