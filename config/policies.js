@@ -16,8 +16,20 @@ module.exports.policies = {
 
   // Default policy for all controllers and actions
   // (`true` allows public access) 
-  '*': true
-
+  '*': true,
+   ChronicleController: {
+    '*':true,
+    create: 'isAuthenticated',
+    update: 'isAuthenticated',
+    delete: 'isAuthenticated'
+    //find: 'isAuthenticated'
+  },
+  UserController: {
+    '*':true,
+    create: 'isAuthenticated',
+    update: 'isAuthenticated',
+    delete: 'isAuthenticated'
+  }
   /*
 	// Here's an example of adding some policies to a controller
 	RabbitController: {

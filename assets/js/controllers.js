@@ -2,7 +2,7 @@
 
 /* Controllers */
 angular.module('chronicles.controllers', [])
-.controller('AdminCtrl', function($scope, Chronicles){
+.controller('AdminCtrl', function($scope, Chronicles, $http){
     $scope.mode = 'Admin Panel';
     $scope.chronicles = Chronicles;
     $scope.mode = 'Admin Panel';
@@ -15,6 +15,12 @@ angular.module('chronicles.controllers', [])
     $scope.layout = function(layout){
         $scope.chronicles.current.layout = layout;
         $scope.mode = 'Admin Panel';
+    }
+
+    $scope.save = function(){
+        $http.post('/chronicles/' + $scope.chronicles.current.id).success(function(){
+            alert('hello world');
+        });
     }
 })
 .controller('GoToCtrl', function($scope, Chronicles) {

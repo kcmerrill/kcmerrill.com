@@ -16,15 +16,31 @@
  */
 
 module.exports = {
-    
-  
-
-
   /**
    * Overrides for the settings in `config/controllers.js`
    * (specific to UserController)
    */
-  _config: {}
+  _config: {},
 
-  
+  /* Login functionality */
+  login: function(req, res){
+    User.findOneByEmail(req.param('email')).done(function (err, user){
+        if(err){
+            res.json({error: 'DB - Error'}, 500);
+        }
+        /* did we find a user? */
+        if(user){
+            /* I know, plain text, so sue me ... for now */
+            if(req.param('password') == user.password){
+                req.session.authenticated = true;
+                res.json(user);
+            } else {
+                req.session.authenticated = false;
+                res.json({error: 'Invalid password.'}, 401);
+            }
+        } else {
+            req.session.user = false;
+        }
+    }); 
+  }
 };

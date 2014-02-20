@@ -294,10 +294,11 @@ body{
     float: right;
     margin-top: 5%;
     margin-right: 5%;
-    width: 375px;
+    width: 450px;
     padding: 30px 30px 30px 30px;
     background-color:rgba(0,0,0,.6);
     color:white;
+    z-index:1000;
 }
 
 .admin .menu{
