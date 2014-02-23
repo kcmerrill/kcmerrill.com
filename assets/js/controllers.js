@@ -3,24 +3,22 @@
 /* Controllers */
 angular.module('chronicles.controllers', [])
 .controller('AdminCtrl', function($scope, Chronicles, $http){
-    $scope.mode = 'Admin Panel';
+    $scope.mode = 'Admin';
     $scope.chronicles = Chronicles;
-    $scope.mode = 'Admin Panel';
+    $scope.mode = 'Admin';
 
     $scope.create = function(){
         $scope.mode = 'Create';
-        $scope.chronicles.create();
+        $scope.chronicles.blank();
     };
 
-    $scope.layout = function(layout){
+    $scope.layout = function(layout, icon_class){
         $scope.chronicles.current.layout = layout;
-        $scope.mode = 'Admin Panel';
+        $scope.chronicles.current.thumbnail.icon.class = icon_class;
     }
 
     $scope.save = function(){
-        $http.post('/chronicles/' + $scope.chronicles.current.id).success(function(){
-            alert('hello world');
-        });
+        $scope.chronicles.save();
     }
 })
 .controller('GoToCtrl', function($scope, Chronicles) {
@@ -36,17 +34,17 @@ angular.module('chronicles.controllers', [])
     $scope.showNext = function(){
         return Chronicles.index != (Chronicles.timeline.length - 1);
     }
-})           
+})
 .controller('ChronicleCtrl', function($scope, angulargmContainer, $location, $routeParams, Chronicles, Channels) {
     /* Setting up my scope variables */
     $scope.chronicles = Chronicles;
     $scope.channels = Channels;
     $scope.path = $location.path().replace('/','');
     $scope.view = _.isEmpty($scope.chronicles.current) ? 'partials/loading.html' : 'partials/' + $scope.chronicles.current + '.html';
-    
+
     /* Default to the bio */
     var chronicle_id = $scope.path != 'loading' && !_.isEmpty($scope.path) ? $scope.path.replace('/','') : 'bio';
-    
+
     /* Fetch the current chronicle */
     $scope.fetch = function(chronicle_id){
         $scope.chronicles.fetch(chronicle_id, true, false, function(){});
@@ -56,11 +54,11 @@ angular.module('chronicles.controllers', [])
     $scope.nextChannel = function(){
         $scope.chronicles.fetchTimeline($scope.channels.next());
     };
-    
+
     $scope.previousChannel = function(){
         $scope.chronicles.fetchTimeline($scope.channels.previous());
     };
-    
+
     /* Giddy up! */
     $scope.chronicles.init(function(){
         $scope.view = 'partials/bio/basic.html';
@@ -78,52 +76,52 @@ angular.module('chronicles.controllers', [])
               zoom: $scope.chronicles.current.map.zoom,
               disableDefaultUI: true
         };
-        
+
         var gmapPromise = $scope.angulargmContainer.getMapPromise('myMap');
         gmapPromise.then(function(gmap) {
           gmap.whatever = 'woot';
-        });    
+        });
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     $scope.whatever = function(){
       var gmapPromise = $scope.angulargmContainer.getMapPromise('myMap');
       gmapPromise.then(function(gmap) {
@@ -135,8 +133,8 @@ angular.module('chronicles.controllers', [])
             pitch: 10
         };
         var panorama = new google.maps.StreetViewPanorama(document.getElementById('myMap'),pov);
-        gmap.setStreetView(panorama);    
+        gmap.setStreetView(panorama);
         //console.log(gmap.streetView.heading, gmap.streetView.pitch);
-      });    
+      });
     }
 });

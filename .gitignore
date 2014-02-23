@@ -7,3 +7,5 @@ node_modules/*
 config/adapters.js
 
 *.log
+
+*.swp
