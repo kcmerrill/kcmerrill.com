@@ -3,9 +3,19 @@
 /* Controllers */
 angular.module('chronicles.controllers', [])
 .controller('AdminCtrl', function($scope, Chronicles, $http){
-    $scope.mode = 'Admin';
+    $scope.mode = false;
     $scope.chronicles = Chronicles;
-    $scope.mode = 'Admin';
+
+    $scope.layouts = [
+        {"label":"Bio:Basic", "value":"partials/bio/basic.html"},
+        {"label":"Thought:Lower-Left", "value":"partials/thought/lower-left.html"},
+        {"label":"Thought:Lower-Right", "value":"partials/thought/lower-right.html"},
+        {"label":"Video:Basic", "value":"partials/video/basic.html"},
+        {"label":"Video:Lower-Left", "value":"partials/video/lower-left.html"},
+        {"label":"Map:Basic", "value":"partials/map/basic.html"},
+        {"label":"Map:Lower-Left", "value":"partials/map/lower-left.html"},
+        {"label":"Blog:Right-Side", "value":"partials/blog/right-side.html"},
+    ];
 
     $scope.create = function(){
         $scope.mode = 'Create';
@@ -19,6 +29,7 @@ angular.module('chronicles.controllers', [])
 
     $scope.save = function(){
         $scope.chronicles.save();
+        $scope.mode = false;
     }
 })
 .controller('GoToCtrl', function($scope, Chronicles) {

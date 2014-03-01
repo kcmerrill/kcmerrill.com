@@ -11,43 +11,54 @@
 </head>
 <body>
 <%if (req.session.authenticated) { %>
-  <div class="admin oswald large-font" ng-controller="AdminCtrl">
-       {{mode}}
-       <div class="menu">
-            <i class="fa fa-edit" ng-click="create()"></i>
-            <i class="fa fa-quote-left" ng-click="mode = 'Title'"></i>
-            <i class="fa fa-camera-retro" ng-click="mode = 'Media'"></i>
-            <i class="fa fa-bars" ng-click="mode = 'Content'"></i>
-            <i class="fa fa-globe"></i>
-            <i class="fa fa-video-camera"></i>
-            <i class="fa fa-tags" ng-click="mode = 'Channels'"></i>
-            <i class="fa fa-floppy-o" ng-click="save()"></i>
+<div ng-controller="AdminCtrl" ng-cloak>
+    <div class="admin-mode oswald editable" ng-show="mode == false">
+        <i class="fa fa-plus" ng-click="create()"></i>
+        <br/>
+        <i class="fa fa-edit" ng-click="mode = true"></i>
+    </div>
+    <div class="admin-bg" ng-show="mode != false">
+        <div class="close large-font pull-right" ng-click="mode = false"><i class="fa fa-times"></i></div>
+        <div class="admin">
+            <div class="oswald medium-font">Layouts:</div>
+            <div class="layout oswald medium-font" ng-repeat="layout in layouts" ng-click="chronicles.current.layout = layout.value">{{layout.label}}</div>
+            <div style="clear:both"></div>
+            <div class="editable">
+                <span class="oswald extra-large-font" ng-click="mode = 'Icon'"><i class="fa fa-{{chronicles.current.thumbnail.icon.class}}"></i></span>
+                <input type="text" class="oswald large-font" ng-show="mode == 'Icon'" ng-model="chronicles.current.thumbnail.icon.class">
+                <span class="oswald extra-large-font" ng-show="mode != 'Title'" ng-click="mode = 'Title'">{{chronicles.current.title.text}}</span>
+                <input type="text" class="oswald extra-large-font" ng-model="chronicles.current.title.text" placeholder="Title ..." ng-show="mode == 'Title'">
+            </div>
+            <div class="editable" ng-click="mode = 'Date'">
+                <span class="oswald medium-font" ng-show="mode != 'Date'">{{chronicles.current.created}}</span>
+                <input type="text" class="oswald medium-font" ng-model="chronicles.current.created" placeholder="Date" ng-show="mode == 'Date'">
+            </div>
+            <div class="panel">
+                <img src="{{chronicles.current.media}}" ng-click="mode = 'Media'" class="editable">
+            </div>
+            <div class="panel" ng-show="mode == 'Media'">
+                <input type="text" class="oswald extra-large-font" ng-model="chronicles.current.media" placeholder="Media http://">
+            </div>
+            <div class="panel" ng-show="mode != 'Media'">
+                <div class="editable" ng-click="mode = 'Content'">
+                    <div class="demo oswald medium-font" ng-show="mode != 'Content'" markdown="{{chronicles.current.content.text}}"></div>
+                    <textarea ng-show="mode == 'Content'" rows="13" ng-model="chronicles.current.content.text">{{chronicles.current.content.text}}</textarea>
+                </div>
+            </div>
         </div>
-
-        <div class="create" ng-show="mode == 'Create'">
-           <div class="layout owswald medium-font the-hand" ng-click="layout('partials/blog/right-side.html', 'edit')">Blog | Right</div>
-           <div class="layout owswald medium-font the-hand" ng-click="layout('partials/map/basic.html', 'edit')">Map | Basic</div>
-           <div class="layout owswald medium-font the-hand" ng-click="layout('partials/map/lower-left.html', 'map-marker')">Map | Lower Left</div>
-           <div class="layout owswald medium-font the-hand" ng-click="layout('partials/thought/lower-left.html', 'quote-right')">Thought | Lower Left</div>
-           <div class="layout owswald medium-font the-hand">Video | Basic</div>
-           <div class="layout owswald medium-font the-hand">Video | Lower Left</div>
+        <div class="footer">
+            <div class="channels large-font oswald">
+                <span ng-click="mode = 'Channels'">Channels:</span><span class="large-font oswald editable" ng-click="mode = 'Channels'" ng-show="mode != 'Channels'">{{chronicles.current.channels}}</span>
+                <input type="text" class="oswald medium-font" ng-model="chronicles.current.channels" placeholder="Channels ... comma seperated" ng-show="mode == 'Channels'">
+            </div>
+            <div style="clear:both"></div>
+            <div class="save">
+                <span class="oswald large-font editable pull-right" ng-click="save()">Save</span>
+            </div>
         </div>
-
-        <div class="title" ng-show="mode == 'Title'">
-            <input type="text" class="oswald medium-font full-width" ng-model="chronicles.current.title.text" placeholder="Title ...">
-        </div>
-
-        <div class="content" ng-show="mode == 'Content'">
-            <textarea class="oswald medium-font full-width" rows="15" ng-model="chronicles.current.content.text"></textarea>
-        </div>
-        <div class="media" ng-show="mode == 'Media'">
-            <input type="text" class="oswald medium-font full-width" ng-model="chronicles.current.media" placeholder="http://">
-        </div>
-        <div class="channels" ng-show="mode == 'Channels'">
-            <input type="text" class="oswald medium-font full-width" ng-model="chronicles.current.channels" placeholder="Channels, Are, Comma, Seperated">
-        </div>
-  </div>
-  <% } %>
+    </div>
+</div>
+<% } %>
   <div class="content" ng-view></div>
   <div class="goto previous" ng-controller="GoToCtrl" ng-show="showPrevious()">
       <div class="medium-font oswald fluff" ng-click="previous()">

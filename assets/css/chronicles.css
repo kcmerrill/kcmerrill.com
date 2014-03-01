@@ -1,3 +1,7 @@
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
 html {
     height:100%;
     width:100%;
@@ -12,11 +16,11 @@ body{
 
 .chronicle {
     background-color:#333;
-    color:white;    
+    color:white;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
-    background-size: cover;    
+    background-size: cover;
     height:100%;
     width:100%;
 }
@@ -47,22 +51,28 @@ body{
 
 .thought {
     display:inline-block;
-    width:90%;
     text-shadow: 5px 5px #000;
 }
 
 .uleft{
-    position:relative;    
+    position:relative;
     left:5%;
     top:20%;
 }
-
+.lright{
+    position:absolute;
+    left:50%;
+    bottom:10%;
+}
 .lleft{
     position:absolute;
     left:5%;
     bottom:10%;
 }
 
+.editable{
+    cursor:pointer;
+}
 .oswald{
     font-family: 'Oswald', sans-serif;
 }
@@ -125,7 +135,7 @@ body{
     margin-top:5%;
     margin-left:5%;
     width:275px;
-    padding:30px 30px 30px 30px;    
+    padding:30px 30px 30px 30px;
 }
 
 .bio img{
@@ -203,8 +213,8 @@ body{
     overflow:hidden;
 }
 
-.timeline .chronicles .chronicle{    
-    display:inline-block;    
+.timeline .chronicles .chronicle{
+    display:inline-block;
     border:6px solid white;
     color:white;
     width:125px;
@@ -262,7 +272,7 @@ body{
 }
 
 .next {
-   right:0; 
+   right:0;
 }
 
 .full-width{
@@ -290,38 +300,78 @@ body{
     display:inline-block;
 }
 
-.admin {
-    float: right;
-    margin-top: 5%;
-    margin-right: 5%;
-    width: 450px;
-    padding: 30px 30px 30px 30px;
-    background-color:rgba(0,0,0,.6);
+.admin-mode{
+    z-index:2000;
+    position:fixed;
+    top:5%;
+    right:0;
+    padding:10px;
+    font-size:25px;
     color:white;
+    background-color:rgba(0,0,0,.6);
+}
+
+.admin-bg {
     z-index:1000;
+    position:fixed;
+    height:100%;
+    width:100%;
+    background-color:rgba(0,0,0,.9);
+    color:white;
 }
 
-.admin .menu{
+.admin-bg .close{
     cursor:pointer;
-    margin-top:-5px;
-    float:right;
 }
 
-.admin .menu i{
-    padding-right:10px;
-    opacity:.7;
-    font-size:20px;
+.admin{
+    height:50%;
+    width:100%;
+    margin-top:10%;
+    padding-left:5%;
 }
 
-.admin .menu i:hover{
-    opacity:1;
+.admin .panel{
+    float:left;
+    vertical-align:top;
+    width:31%;
+    padding:0px;
+    margin;0px;
+}
+
+.admin .panel img{
+    width:95%;
+    clear:both;
+}
+
+.admin input[type="text"], textarea{
+    padding:10px;
+    width:90%;
+    font-size:24px;
 }
 
 .admin .layout{
     cursor:pointer;
-    padding:5px;
+    padding:10px;
+    float:left;
 }
 
 .admin .layout:hover{
-   background-color:black; 
+    background-color:#545454;
+}
+
+.admin-bg .footer{
+    position:absolute;
+    bottom:0;
+    width:100%;
+}
+
+.admin-bg .footer .channels{
+    width:100%;
+}
+.admin-bg .footer .save {
+    height:45px;
+    padding:10px;
+    background-color:green;
+    color:white;
 }
