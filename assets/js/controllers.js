@@ -5,7 +5,6 @@ angular.module('chronicles.controllers', [])
 .controller('AdminCtrl', function($scope, Chronicles, $http){
     $scope.mode = false;
     $scope.chronicles = Chronicles;
-
     $scope.layouts = [
         {"label":"Bio:Basic", "value":"partials/bio/basic.html"},
         {"label":"Thought:Lower-Left", "value":"partials/thought/lower-left.html"},
@@ -30,6 +29,11 @@ angular.module('chronicles.controllers', [])
     $scope.save = function(){
         $scope.chronicles.save();
         $scope.mode = false;
+    }
+
+    $scope.photos = function(){
+        $scope.mode = 'Media';
+        $scope.chronicles.photos();
     }
 })
 .controller('GoToCtrl', function($scope, Chronicles) {

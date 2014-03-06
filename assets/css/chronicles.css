@@ -344,6 +344,11 @@ body{
     clear:both;
 }
 
+.admin .panel .thumbnail{
+    cursor:pointer;
+    width:80px !important;
+}
+
 .admin input[type="text"], textarea{
     padding:10px;
     width:90%;

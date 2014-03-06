@@ -14,6 +14,7 @@
  *
  * @docs        :: http://sailsjs.org/#!documentation/controllers
  */
+var Flickr = require('node-flickr');
 
 module.exports = {
   /**
@@ -22,6 +23,33 @@ module.exports = {
    */
   _config: {},
 
+  photos:function(req, res){
+    User.findOneByEmail(req.param('id')).done(function(err, user){
+    if (err) res.json({error: 'DB - Error'});
+        if(user && user.flickr.api_key){
+            flickr = new Flickr({'api_key': user.flickr.api_key, 'per_page':15});
+            flickr.get('photos.search', {'user_id':user.flickr.id}, function(result){
+                res.json(result);
+            });
+        }else {
+            res.json({error: 'Invalid User'});
+        }
+    });
+  },
+  photo:function(req, res){
+    User.findOneByEmail(req.param('id')).done(function(err, user){
+        if (err) res.json({error: 'DB - Error'});
+            if(user && user.flickr.api_key){
+                flickr = new Flickr({'api_key': user.flickr.api_key});
+                flickr.get('photos.getSizes', {'photo_id':req.param('photo_id')}, function(result){
+                    if(!result) res.json({error: 'Invalid Photo'});
+                    res.json(result);
+                });
+            }else {
+                res.json({error: 'Invalid User'});
+            }
+        })
+    ;},
   /* Login functionality */
   login: function(req, res){
     User.findOneByEmail(req.param('email')).done(function (err, user){
@@ -41,6 +69,6 @@ module.exports = {
         } else {
             req.session.user = false;
         }
-    }); 
+    });
   }
 };

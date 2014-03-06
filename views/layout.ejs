@@ -39,10 +39,11 @@
                 <input type="text" class="oswald medium-font" ng-model="chronicles.current.created" placeholder="Date" ng-show="mode == 'Date'">
             </div>
             <div class="panel">
-                <img src="{{chronicles.current.media}}" ng-click="mode = 'Media'" class="editable">
+                <img src="{{chronicles.current.media}}" ng-click="photos()" class="editable">
             </div>
             <div class="panel" ng-show="mode == 'Media'">
-                <input type="text" class="oswald extra-large-font" ng-model="chronicles.current.media" placeholder="Media http://">
+                <input type="text" class="oswald medium-font" ng-model="chronicles.current.media" placeholder="http://..." ng-show="mode == 'Media'">
+                <span ng-repeat="i in chronicles.images"><img src="http://farm{{i.farm}}.staticflickr.com/{{i.server}}/{{i.id}}_{{i.secret}}_t.jpg" class="thumbnail" ng-click="chronicles.photo(i.id)" ng-show="$index <= 10"></span>
             </div>
             <div class="panel" ng-show="mode != 'Media'">
                 <div class="editable" ng-click="mode = 'Content'">

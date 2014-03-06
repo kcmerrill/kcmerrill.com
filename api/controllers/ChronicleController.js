@@ -20,5 +20,10 @@ module.exports = {
    * Overrides for the settings in `config/controllers.js`
    * (specific to ChronicleController)
    */
-  _config: {}
+  _config: {},
+  share: function(req,res){
+    Chronicle.findById(req.param('id')).done(function(err, chronicle){
+        res.send(chronicle);
+    });
+  }
 };

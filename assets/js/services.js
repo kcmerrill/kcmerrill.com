@@ -32,6 +32,7 @@ angular.module('chronicles.services', [])
         return {
             selected_idx: 0,
             timeline: [],
+            images:[],
             current:{},
             loaded: false,
             loaded_timeline: '',
@@ -189,6 +190,19 @@ angular.module('chronicles.services', [])
                         console.log('Created!');
                     });
                 }
+            },
+            photos: function(){
+                var self = this;
+                $http.get('/users/' + self.bio.email + '/photos/').success(function(p){
+                    self.images = p.photos.photo;
+                });
+            },
+            photo: function(photo_id){
+                var self = this;
+                $http.get('/users/' + self.bio.email + '/photos/' + photo_id).success(function(photos){
+                    self.current.media = photos.sizes.size[photos.sizes.size.length - 1].source;
+                });
+
             },
             blank: function(){
                 var self = this;
