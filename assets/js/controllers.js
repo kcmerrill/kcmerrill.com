@@ -14,6 +14,7 @@ angular.module('chronicles.controllers', [])
         {"label":"Map:Basic", "value":"partials/map/basic.html"},
         {"label":"Map:Lower-Left", "value":"partials/map/lower-left.html"},
         {"label":"Blog:Right-Side", "value":"partials/blog/right-side.html"},
+        {"label":"Blog:Left-Side", "value":"partials/blog/left-side.html"}
     ];
 
     $scope.create = function(){
