@@ -69,7 +69,10 @@ angular.module('chronicles.services', [])
             },
             fetchTimeline: function(channel, callback){
                 var self = this;
-                var params = { limit : self.limit , sort: "createdAt DESC"};
+                var params = {
+                    limit: self.limit,
+                    sort: "updatedAt DESC"
+                };
 
                 /* Have we already loaded the appropriate timeline? */
                 if(channel.toLowerCase() == self.loaded_timeline.toLowerCase()){
