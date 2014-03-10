@@ -186,22 +186,15 @@ angular.module('chronicles.services', [])
                 if(self.current.thumbnail.image.indexOf('youtube.com') != -1){
                     self.current.thumbnail.image = 'http://img.youtube.com/vi/' + self.current.thumbnail.image.split("v=")[1] + '/1.jpg';
                 }
-
-                console.log(self.current.thumbnail.image);
-                return true;
                 if(typeof self.current.channels == 'string'){
                     /* Be sure to split the channels so they are back as an array */
                     self.current.channels = self.current.channels.split(',');
                 }
                 /* Take the current chroncile and upsert it */
                 if(self.current.id){
-                    $http.put('/chronicles/' + self.current.id, self.current).success(function(){
-                        console.log('Updated!');
-                    });
+                    $http.put('/chronicles/' + self.current.id, self.current).success(function(){});
                 } else {
-                    $http.post('/chronicles', self.current).success(function(){
-                        console.log('Created!');
-                    });
+                    $http.post('/chronicles', self.current).success(function(){});
                 }
             },
             photos: function(){
