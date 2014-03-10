@@ -4,7 +4,7 @@ angular.module('chronicles.services', [])
         return {
             selected_idx:0,
             current:'',
-            channels: ['EVERYTHING', 'ABOUT-ME', 'CHECK-IN', 'THOUGHTS', 'BLOG', 'PHOTOS', 'FUNNY', 'CODE'],
+            channels: ['EVERYTHING', 'ABOUT-ME', 'MUSIC', 'THOUGHTS', 'BLOG', 'PHOTOS', 'FUNNY', 'CHECK-IN', 'CODE'],
             list: function(){
                 this.current = this.channels[this.selected_idx];
             },
@@ -182,6 +182,13 @@ angular.module('chronicles.services', [])
                 var self = this;
                 /* Copy the media to the thumbnail automagically */
                 self.current.thumbnail.image = self.current.media;
+                /* If the image is a youtube video, lets go ahead and fetch the youtube thunbmail instead! */
+                if(self.current.thumbnail.image.indexOf('youtube.com') != -1){
+                    self.current.thumbnail.image = 'http://img.youtube.com/vi/' + self.current.thumbnail.image.split("v=")[1] + '/1.jpg';
+                }
+
+                console.log(self.current.thumbnail.image);
+                return true;
                 if(typeof self.current.channels == 'string'){
                     /* Be sure to split the channels so they are back as an array */
                     self.current.channels = self.current.channels.split(',');
