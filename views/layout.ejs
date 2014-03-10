@@ -39,7 +39,8 @@
                 <input type="text" class="oswald medium-font" ng-model="chronicles.current.created" placeholder="Date" ng-show="mode == 'Date'">
             </div>
             <div class="panel">
-                <img src="{{chronicles.current.media}}" ng-click="photos()" class="editable">
+                <img src="{{chronicles.current.media}}" ng-click="photos()" class="editable" ng-show="chronicles.current.media.indexOf('youtube.com') == -1">
+                <iframe src="{{chronicles.mediaToYouTube()}}" frameborder="0" allowfullscreen ng-show="chronicles.current.media.indexOf('youtube.com') != -1"></iframe>
             </div>
             <div class="panel" ng-show="mode == 'Media'">
                 <input type="text" class="oswald medium-font" ng-model="chronicles.current.media" placeholder="http://..." ng-show="mode == 'Media'">

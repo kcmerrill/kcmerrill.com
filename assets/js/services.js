@@ -4,7 +4,7 @@ angular.module('chronicles.services', [])
         return {
             selected_idx:0,
             current:'',
-            channels: ['EVERYTHING', 'ABOUT-ME', 'CHECK-IN', 'THOUGHTS', 'BLOG', 'PHOTOS', 'CODE'],
+            channels: ['EVERYTHING', 'ABOUT-ME', 'CHECK-IN', 'THOUGHTS', 'BLOG', 'PHOTOS', 'FUNNY', 'CODE'],
             list: function(){
                 this.current = this.channels[this.selected_idx];
             },
@@ -39,6 +39,9 @@ angular.module('chronicles.services', [])
             loading: [],
             limit: 100,
             channels: Channels,
+            mediaToYouTube: function(){
+                return this.current.media.replace("watch?v=","embed/") + '?controls=0&autoplay=1';
+            },
             previous: function(){
                 var idx = this.selected_idx - 1;
                 if(idx >= 0){

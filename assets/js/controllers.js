@@ -10,6 +10,8 @@ angular.module('chronicles.controllers', [])
         {"label":"Thought:Lower-Left", "value":"partials/thought/lower-left.html"},
         {"label":"Thought:Lower-Right", "value":"partials/thought/lower-right.html"},
         {"label":"Video:Basic", "value":"partials/video/basic.html"},
+        {"label":"Video:Blog-Left", "value":"partials/video/blog-left.html"},
+        {"label":"Video:Blog-Right", "value":"partials/video/blog-right.html"},
         {"label":"Video:Lower-Left", "value":"partials/video/lower-left.html"},
         {"label":"Map:Basic", "value":"partials/map/basic.html"},
         {"label":"Map:Lower-Left", "value":"partials/map/lower-left.html"},
@@ -98,10 +100,6 @@ angular.module('chronicles.controllers', [])
           gmap.whatever = 'woot';
         });
     }
-
-
-
-
 
 
 

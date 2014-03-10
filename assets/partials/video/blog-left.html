@@ -1,0 +1,15 @@
+<div class="chronicle video oswald">
+  <iframe src="{{chronicles.mediaToYouTube()}}" frameborder="0" allowfullscreen></iframe>
+     <div class="blog pull-left left-aligned" style="background-color:rgba({{chronicles.current.content.background.r}}, {{chronicles.current.content.background.g}}, {{chronicles.current.content.background.g}}, {{chronicles.current.content.background.a}})">
+        <div class="title pull-left" style="font-size:{{chronicles.current.title.font.size}}px;color:{{chronicles.current.title.font.color}};border-color:{{chronicles.current.title.font.color}};">
+            {{chronicles.current.title.text}}
+        </div>
+        <div class="clearfix created">
+            {{chronicles.current.created}}
+        </div>
+        <div style="font-size:{{chronicles.current.title.font.size}}px;color:{{chronicles.current.title.font.color}};">
+            <p class="p-font opensans" markdown="{{chronicles.current.content.text}}">
+        </div>
+    </div>
+</div>
+
