@@ -23,7 +23,7 @@ module.exports = {
   _config: {},
   share: function(req,res){
     Chronicle.findById(req.param('id')).done(function(err, chronicle){
-        res.send(chronicle);
+        res.view('chronicles/share',{ chronicle:chronicle[0] });
     });
   }
 };
