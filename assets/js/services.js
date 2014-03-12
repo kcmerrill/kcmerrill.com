@@ -184,7 +184,7 @@ angular.module('chronicles.services', [])
                 self.current.thumbnail.image = self.current.media;
                 /* If the image is a youtube video, lets go ahead and fetch the youtube thunbmail instead! */
                 if(self.current.thumbnail.image.indexOf('youtube.com') != -1){
-                    self.current.thumbnail.image = 'http://img.youtube.com/vi/' + self.current.thumbnail.image.split("v=")[1] + '/1.jpg';
+                    self.current.thumbnail.image = 'http://img.youtube.com/vi/' + self.current.thumbnail.image.split("v=")[1] + '/0.jpg';
                 }
                 if(typeof self.current.channels == 'string'){
                     /* Be sure to split the channels so they are back as an array */
