@@ -93,7 +93,7 @@
                 <i class="fa fa-caret-down" ng-click="nextChannel()"></i>&nbsp;<i class="fa fa-caret-up" ng-click="previousChannel()"></i>
             </div>
         </div>
-        <div class="chronicle" style="background-image:url('{{chronicle.thumbnail.image}}')" ng-click="chronicles.fetch(chronicle.id)" ng-repeat="chronicle in chronicles.timeline">
+        <div class="chronicle" style="background-image:url('{{chronicle.thumbnail.image}}')" ng-click="chronicles.fetch(chronicle.id)" ng-repeat="chronicle in chronicles.timeline" ng-show="$index >= chronicles.selected_idx">
             <div class="type" style="color:{{chronicle.thumbnail.icon.color}}">
                 <i class="fa fa-{{chronicle.thumbnail.icon.class}}"></i>
             </div>
