@@ -7,13 +7,14 @@
  */
 
 module.exports = {
-  attributes: {
-    email    : 'string',
-    password : 'string'
-  },
-  toJSON: function(){
-    var obj = this.toObject();
-    delete obj.password;
-    return obj;
-  }
+    attributes: {
+        email: 'string',
+        password: 'string',
+        /* Remove the password field */
+        toJSON: function() {
+            var obj = this.toObject();
+            delete obj.password;
+            return obj;
+        }
+    }
 };

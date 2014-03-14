@@ -70,10 +70,14 @@ angular.module('chronicles.controllers', [])
 
     /* Change the channel */
     $scope.nextChannel = function(){
+        /* we need to reset the selected index */
+        $scope.chronicles.selected_idx = 0;
         $scope.chronicles.fetchTimeline($scope.channels.next());
     };
 
     $scope.previousChannel = function(){
+        /* we need to reset the selected index */
+        $scope.chronicles.selected_idx = 0;
         $scope.chronicles.fetchTimeline($scope.channels.previous());
     };
 

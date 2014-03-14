@@ -25,11 +25,10 @@
     <div class="admin-bg" ng-show="mode != false">
         <div class="close large-font pull-right" ng-click="mode = false"><i class="fa fa-times"></i></div>
         <div class="admin">
-            <div class="oswald medium-font">Layouts:</div>
-            <div class="layout oswald medium-font" ng-repeat="layout in layouts" ng-click="chronicles.current.layout = layout.value">{{layout.label}}</div>
-            <div style="clear:both"></div>
+           <div style="clear:both"></div>
             <div class="editable">
                 <span class="oswald extra-large-font" ng-click="mode = 'Icon'"><i class="fa fa-{{chronicles.current.thumbnail.icon.class}}"></i></span>
+                <input colorpicker class="oswald large-font" ng-show="mode == 'Icon'" ng-model="chronicles.current.thumbnail.icon.color" >
                 <input type="text" class="oswald large-font" ng-show="mode == 'Icon'" ng-model="chronicles.current.thumbnail.icon.class">
                 <span class="oswald extra-large-font" ng-show="mode != 'Title'" ng-click="mode = 'Title'">{{chronicles.current.title.text}}</span>
                 <input type="text" class="oswald extra-large-font" ng-model="chronicles.current.title.text" placeholder="Title ..." ng-show="mode == 'Title'">
@@ -41,26 +40,29 @@
             <div class="panel">
                 <img src="{{chronicles.current.media}}" ng-click="photos()" class="editable" ng-show="chronicles.current.media.indexOf('youtube.com') == -1">
                 <iframe src="{{chronicles.mediaToYouTube()}}" frameborder="0" allowfullscreen ng-show="chronicles.current.media.indexOf('youtube.com') != -1"></iframe>
-            </div>
+                <div class="channels large-font oswald">
+                    Channels:<input type="text" class="oswald medium-font" ng-list ng-model="chronicles.current.channels" placeholder="Channels ... comma seperated">
+                </div>
+                <br/></br>
+                <div class="save oswald large-font editable" ng-click="save()">
+                    Save
+                </div>
+           </div>
             <div class="panel" ng-show="mode == 'Media'">
                 <input type="text" class="oswald medium-font" ng-model="chronicles.current.media" placeholder="http://..." ng-show="mode == 'Media'">
-                <span ng-repeat="i in chronicles.images"><img src="http://farm{{i.farm}}.staticflickr.com/{{i.server}}/{{i.id}}_{{i.secret}}_t.jpg" class="thumbnail" ng-click="chronicles.photo(i.id)" ng-show="$index <= 10"></span>
+                <span ng-repeat="i in chronicles.images"><img src="http://farm{{i.farm}}.staticflickr.com/{{i.server}}/{{i.id}}_{{i.secret}}_t.jpg" class="thumbnail" ng-click="chronicles.photo(i.id)" ng-show="$index <= 20"></span>
             </div>
             <div class="panel" ng-show="mode != 'Media'">
                 <div class="editable" ng-click="mode = 'Content'">
+                    <div class="demo oswald medium-font" ng-show="chronicles.current.content.text == ''">[ Content ]</div>
                     <div class="demo oswald medium-font" ng-show="mode != 'Content'" markdown="{{chronicles.current.content.text}}"></div>
-                    <textarea ng-show="mode == 'Content'" rows="13" ng-model="chronicles.current.content.text">{{chronicles.current.content.text}}</textarea>
                 </div>
             </div>
-        </div>
-        <div class="footer">
-            <div class="channels large-font oswald">
-                <span ng-click="mode = 'Channels'">Channels:</span><span class="large-font oswald editable" ng-click="mode = 'Channels'" ng-show="mode != 'Channels'">{{chronicles.current.channels}}</span>
-                <input type="text" class="oswald medium-font" ng-model="chronicles.current.channels" placeholder="Channels ... comma seperated" ng-show="mode == 'Channels'">
+            <div class="panel-content" ng-show="mode == 'Content'">
+                <textarea ng-show="mode == 'Content'" rows="13" ng-model="chronicles.current.content.text">{{chronicles.current.content.text}}</textarea>
             </div>
-            <div style="clear:both"></div>
-            <div class="save">
-                <span class="oswald large-font editable pull-right" ng-click="save()">Save</span>
+            <div class="panel" ng-show="mode != 'Content'">
+                <div class="layout oswald medium-font" ng-repeat="layout in layouts" ng-click="chronicles.current.layout = layout.value">{{layout.label}}</div>
             </div>
         </div>
     </div>

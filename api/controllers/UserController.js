@@ -61,7 +61,7 @@ module.exports = {
             /* I know, plain text, so sue me ... for now */
             if(req.param('password') == user.password){
                 req.session.authenticated = true;
-                res.json(user);
+                res.json(user.toJSON());
             } else {
                 req.session.authenticated = false;
                 res.json({error: 'Invalid password.'}, 401);

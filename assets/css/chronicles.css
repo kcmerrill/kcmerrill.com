@@ -14,6 +14,10 @@ body{
     padding:0px;
 }
 
+a{
+    color:white;
+}
+
 .chronicle {
     background-color:#333;
     color:white;
@@ -307,8 +311,8 @@ body{
 .admin-mode{
     z-index:999;
     position:fixed;
-    top:5%;
     right:0;
+    top:5%;
     padding:10px;
     font-size:25px;
     color:white;
@@ -331,7 +335,6 @@ body{
 .admin{
     height:50%;
     width:100%;
-    margin-top:10%;
     padding-left:5%;
 }
 
@@ -341,6 +344,14 @@ body{
     width:31%;
     padding:0px;
     margin;0px;
+}
+
+.admin .panel-content{
+    float:left;
+    vertical-align:top;
+    padding:0px;
+    margin;0px;
+    width:62% !important;
 }
 
 .admin .panel img{
@@ -360,9 +371,9 @@ body{
 }
 
 .admin .layout{
+    text-align:right;
     cursor:pointer;
     padding:10px;
-    float:left;
 }
 
 .admin .layout:hover{
@@ -378,9 +389,10 @@ body{
 .admin-bg .footer .channels{
     width:100%;
 }
-.admin-bg .footer .save {
-    height:45px;
-    padding:10px;
+.admin-bg .save {
+    text-align:center;
+    padding:10px 0px 10px 0px;
     background-color:green;
+    width:95%;
     color:white;
 }

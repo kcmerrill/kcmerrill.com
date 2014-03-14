@@ -39,8 +39,13 @@ angular.module('chronicles.services', [])
             loading: [],
             limit: 100,
             channels: Channels,
-            mediaToYouTube: function(){
-                return this.current.media.replace("watch?v=","embed/") + '?controls=0&autoplay=1';
+            mediaToYouTube: function(autoplay){
+                if(this.current.media && this.current.media.indexOf('youtube.com') != -1){
+                    autoplay = autoplay == undefined ? 1 : 0;
+                    return this.current.media.replace("watch?v=","embed/") + '?controls=0&autoplay=' + autoplay;
+                } else {
+                    return '';
+                }
             },
             previous: function(){
                 var idx = this.selected_idx - 1;
@@ -152,10 +157,6 @@ angular.module('chronicles.services', [])
 
                 if(render && chronicle){
                     self.current = chronicle;
-                    /* Make sure to transform the tags for editing */
-                    if(self.current.channels !== undefined && typeof self.current.channels != 'string'){
-                        self.current.channels = self.current.channels.join();
-                    }
                     /* Be sure to update the template for the chronicle */
                     self.render(chronicle_id);
                     /* Update the selected index for the prev/next arrows */
@@ -185,10 +186,6 @@ angular.module('chronicles.services', [])
                 /* If the image is a youtube video, lets go ahead and fetch the youtube thunbmail instead! */
                 if(self.current.thumbnail.image.indexOf('youtube.com') != -1){
                     self.current.thumbnail.image = 'http://img.youtube.com/vi/' + self.current.thumbnail.image.split("v=")[1] + '/0.jpg';
-                }
-                if(typeof self.current.channels == 'string'){
-                    /* Be sure to split the channels so they are back as an array */
-                    self.current.channels = self.current.channels.split(',');
                 }
                 /* Take the current chroncile and upsert it */
                 if(self.current.id){
