@@ -9,6 +9,7 @@ angular.module('chronicles.controllers', [])
         {"label":"Bio:Basic", "value":"partials/bio/basic.html"},
         {"label":"Thought:Lower-Left", "value":"partials/thought/lower-left.html"},
         {"label":"Thought:Lower-Right", "value":"partials/thought/lower-right.html"},
+        {"label":"Thought:Upper-Left", "value":"partials/thought/upper-left.html"},
         {"label":"Video:Basic", "value":"partials/video/basic.html"},
         {"label":"Video:Blog-Left", "value":"partials/video/blog-left.html"},
         {"label":"Video:Blog-Right", "value":"partials/video/blog-right.html"},

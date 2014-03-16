@@ -65,13 +65,14 @@ a{
 .uleft{
     position:relative;
     left:5%;
-    top:20%;
+    top:10%;
 }
 .lright{
     position:absolute;
     left:50%;
     bottom:20%;
 }
+
 .lleft{
     position:absolute;
     left:5%;
