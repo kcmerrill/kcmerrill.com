@@ -80,7 +80,7 @@
       </div>
   </div>
   <div class="timeline" ng-controller="ChronicleCtrl">
-    <div class="chronicles">
+    <div class="chronicles" ng-show="show_timeline">
         <div class="chronicle pull-left" style="background-image:url('{{chronicles.bio.thumbnail.image}}')" ng-click="chronicles.fetch('bio')">
             <div class="type" style="color:{{chronicles.bio.thumbnail.icon.color}}">
                 <i class="fa fa-{{chronicles.bio.thumbnail.icon.class}}"></i>
@@ -95,13 +95,13 @@
                 <i class="fa fa-caret-down" ng-click="nextChannel()"></i>&nbsp;<i class="fa fa-caret-up" ng-click="previousChannel()"></i>
             </div>
         </div>
-        <div class="chronicle" style="background-image:url('{{chronicle.thumbnail.image}}')" ng-click="chronicles.fetch(chronicle.id)" ng-repeat="chronicle in chronicles.timeline" ng-show="$index >= chronicles.selected_idx">
+        <div class="chronicle" style="background-image:url('{{chronicle.thumbnail.image}}')" ng-click="fetch(chronicle.id)" ng-repeat="chronicle in chronicles.timeline" ng-show="$index >= chronicles.selected_idx - 4" ng-class="{selected: $index == chronicles.selected_idx}">
             <div class="type" style="color:{{chronicle.thumbnail.icon.color}}">
                 <i class="fa fa-{{chronicle.thumbnail.icon.class}}"></i>
             </div>
         </div>
     </div>
-    <div class="navigation oswald medium-font">
+    <div class="navigation oswald medium-font" ng-show="!show_timeline" ng-click="show_timeline = true">
         <i class="fa fa-list"></i> Timeline
     </div>
   </div>

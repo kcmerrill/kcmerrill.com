@@ -39,6 +39,7 @@ angular.module('chronicles.controllers', [])
         $scope.chronicles.photos();
     }
 })
+
 .controller('GoToCtrl', function($scope, Chronicles) {
     $scope.previous = function(){
         Chronicles.previous();
@@ -50,7 +51,11 @@ angular.module('chronicles.controllers', [])
         return Chronicles.index != 0;
     }
     $scope.showNext = function(){
-        return Chronicles.index != (Chronicles.timeline.length - 1);
+        if(Chronicles.current.id == 'bio') {
+            return true;
+        } else {
+            return  Chronicles.index != (Chronicles.timeline.length - 1);
+        }
     }
 })
 .controller('ChronicleCtrl', function($scope, angulargmContainer, $location, $routeParams, Chronicles, Channels) {
@@ -59,12 +64,14 @@ angular.module('chronicles.controllers', [])
     $scope.channels = Channels;
     $scope.path = $location.path().replace('/','');
     $scope.view = _.isEmpty($scope.chronicles.current) ? 'partials/loading.html' : 'partials/' + $scope.chronicles.current + '.html';
+    $scope.show_timeline = false;
 
     /* Default to the bio */
     var chronicle_id = $scope.path != 'loading' && !_.isEmpty($scope.path) ? $scope.path.replace('/','') : 'bio';
 
     /* Fetch the current chronicle */
     $scope.fetch = function(chronicle_id){
+        $scope.show_timeline=false;
         $scope.chronicles.fetch(chronicle_id, true, false, function(){});
     };
 

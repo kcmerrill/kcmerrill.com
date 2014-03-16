@@ -70,12 +70,12 @@ a{
 .lright{
     position:absolute;
     left:50%;
-    bottom:10%;
+    bottom:20%;
 }
 .lleft{
     position:absolute;
     left:5%;
-    bottom:10%;
+    bottom:20%;
 }
 
 .editable{
@@ -203,18 +203,8 @@ a{
     height:95px;
     width:100%;
 }
-.timeline:hover{
-    height:auto;
-}
-.timeline:hover .chronicles{
-    display:block;
-}
 
-.timeline:hover .navigation {
-    display:none;
-}
 .timeline .chronicles{
-    display:none;
     height:94px;
     width:100%;
     background-color:rgba(0,0,0,.8);
@@ -247,6 +237,9 @@ a{
     font-size:30px;
 }
 
+.timeline .chronicles .selected{
+    opacity: 1 !important;
+}
 
 .navigation {
     position:fixed;
@@ -255,6 +248,7 @@ a{
     padding:15px;
     background-color:rgba(0,0,0,.6);
     color:white;
+    cursor:pointer;
 }
 
 .goto {

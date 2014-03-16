@@ -189,9 +189,13 @@ angular.module('chronicles.services', [])
                 }
                 /* Take the current chroncile and upsert it */
                 if(self.current.id){
-                    $http.put('/chronicles/' + self.current.id, self.current).success(function(){});
+                    $http.put('/chronicles/' + self.current.id, self.current).success(function(c){
+                        window.location.href = 'https://www.facebook.com/sharer/sharer.php?u=http://kcmerrill.com/chronicles/share/' + c.id;
+                    });
                 } else {
-                    $http.post('/chronicles', self.current).success(function(){});
+                    $http.post('/chronicles', self.current).success(function(c){
+                        window.location.href = 'https://www.facebook.com/sharer/sharer.php?u=http://kcmerrill.com/chronicles/share/' + c.id;
+                    });
                 }
             },
             photos: function(){
