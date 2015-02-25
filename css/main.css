@@ -1,0 +1,71 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.dot-com-font{
+    font-family: 'Nothing You Could Do', cursive;
+}
+
+.custom-font {
+    font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.centered-font {
+    text-align:center;
+}
+
+.entry-text {
+    text-align:left;
+    font-size:30px;
+    padding:100px;
+}
+
+.entry-text img {
+    height:25px;
+    cursor:pointer;
+}
+
+.main-photo {
+    background:url(../images/bella_and_i.jpg) no-repeat center center;
+    background-color:black;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover; 
+    height:100%;
+    width:100%;
+    opacity:.8;
+}
+
+.overlay {
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    background-color:black;
+    opacity:.7;
+}
+
+.content {
+    color:white;
+    padding:20px;
+    font-size:12px;
+    position:fixed;
+    top:0;
+    left:0;
+    height:100%;
+    width:100%;
+    z-index:10;    
+}
+
+.menu {
+    position:fixed;
+    bottom:0;
+    height:75px;
+    width:100%;
+    padding:10px;
+    background-color:black;
+    z-index:11;
+}
